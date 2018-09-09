@@ -10,6 +10,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Button from "@material-ui/core/Button";
 import homeApis from "./home.api.js";
+import OtpPanel from "../otpPanel";
 import "./home.css";
 class Home extends React.Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class Home extends React.Component {
       name: "",
       showPassword: false,
       password: "",
-      mobileNumber: ""
+      mobileNumber: "",
+      otpSent: false
     };
   }
   handleChange(e) {
@@ -50,12 +52,17 @@ class Home extends React.Component {
         password: this.state.password
       })
       .then(res => {
-        console.log(res);
+        if (res.data.status == 200) {
+          this.setState({
+            otpSent: true
+          });
+        }
       });
   }
   render() {
     return (
       <div>
+        <OtpPanel />
         <h1 className="home-title">Sign Up Here</h1>
         <Grid container justify="center" alignItems="center">
           <div className="form-panel">
