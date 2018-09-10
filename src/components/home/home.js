@@ -52,7 +52,7 @@ class Home extends React.Component {
         password: this.state.password
       })
       .then(res => {
-        if (res.data.status == 200) {
+        if (res.status == 200) {
           this.setState({
             otpSent: true
           });
@@ -62,74 +62,79 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <OtpPanel />
-        <h1 className="home-title">Sign Up Here</h1>
-        <Grid container justify="center" alignItems="center">
-          <div className="form-panel">
-            <Grid item xs={12}>
-              <Input
-                id="name-simple"
-                placeholder="Name"
-                onChange={e => {
-                  this.handleChange(e);
-                }}
-              />
-            </Grid>
+        {this.state.otpSent ? (
+          <OtpPanel mobileNumber={this.state.mobileNumber} />
+        ) : (
+          <div>
+            <h1 className="home-title">Sign Up Here</h1>
+            <Grid container justify="center" alignItems="center">
+              <div className="form-panel">
+                <Grid item xs={12}>
+                  <Input
+                    id="name-simple"
+                    placeholder="Name"
+                    onChange={e => {
+                      this.handleChange(e);
+                    }}
+                  />
+                </Grid>
 
-            <Grid item xs={12}>
-              {" "}
-              <Input
-                id="mobile-number"
-                placeholder="Mobile Number"
-                onChange={e => {
-                  this.handleMobileChange(e);
-                }}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Input
-                id="adornment-password"
-                placeholder="Password"
-                type={this.state.showPassword ? "text" : "password"}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="Toggle password visibility"
+                <Grid item xs={12}>
+                  {" "}
+                  <Input
+                    id="mobile-number"
+                    placeholder="Mobile Number"
+                    onChange={e => {
+                      this.handleMobileChange(e);
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Input
+                    id="adornment-password"
+                    placeholder="Password"
+                    type={this.state.showPassword ? "text" : "password"}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="Toggle password visibility"
+                          onClick={() => {
+                            this.handleClickShowPassword();
+                          }}
+                          onMouseDown={() => {
+                            this.handleMouseDownPassword(event);
+                          }}
+                          onChange={() => {
+                            this.handleChangePassword(event);
+                          }}
+                        >
+                          {this.state.showPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <div className="submit-dimensions">
+                    <Button
+                      variant="contained"
+                      color="primary"
                       onClick={() => {
-                        this.handleClickShowPassword();
-                      }}
-                      onMouseDown={() => {
-                        this.handleMouseDownPassword(event);
-                      }}
-                      onChange={() => {
-                        this.handleChangePassword(event);
+                        this.apiCaller();
                       }}
                     >
-                      {this.state.showPassword ? (
-                        <VisibilityOff />
-                      ) : (
-                        <Visibility />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <div className="submit-dimensions">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    this.apiCaller();
-                  }}
-                >
-                  Sign Up
-                </Button>
+                      Sign Up
+                    </Button>
+                  </div>
+                </Grid>
               </div>
             </Grid>
           </div>
-        </Grid>
+        )}
       </div>
     );
   }
