@@ -1,6 +1,7 @@
 import Button from "@material-ui/core/Button";
 import React from "react";
 import Input from "@material-ui/core/Input";
+import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import "./otpPanel.css";
@@ -45,34 +46,38 @@ class OtpPanel extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="otpPanel-title">Please enter the OTP</h1>
-        <div className="otp-form">
-          <Grid container justify="center" alignItems="center">
-            <Grid item xs={12}>
-              <Input
-                id="otp"
-                placeholder="4 digit OTP"
-                onChange={e => {
-                  this.handleChange(e);
-                }}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <div className="otp-submit">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    this.apiCaller();
-                  }}
-                >
-                  Sign Up
-                </Button>
-              </div>
-            </Grid>
-          </Grid>
+        <div className="otpPanel-title">
+          <Typography variant="display1" gutterBottom>
+            Please enter the OTP
+          </Typography>
         </div>
-        <h3>{this.state.postVerificationMessage}</h3>
+        <div className="otp-form">
+          <div className="verify-input">
+            <Input
+              id="otp"
+              placeholder="4 digit OTP"
+              onChange={e => {
+                this.handleChange(e);
+              }}
+            />
+          </div>
+          <div className="otp-submit">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                this.apiCaller();
+              }}
+            >
+              Verify
+            </Button>
+          </div>
+        </div>
+        <div className="verify-input">
+          <Typography variant="display1" gutterBottom>
+            {this.state.postVerificationMessage}
+          </Typography>
+        </div>
       </div>
     );
   }

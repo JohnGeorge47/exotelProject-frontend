@@ -5,4 +5,8 @@
 }
 .otp-submit {
   margin-top: 10px;
+  text-align: center;
+}
+.verify-input {
+  text-align: center;
 }

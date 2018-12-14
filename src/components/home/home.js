@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Input from "@material-ui/core/Input";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
@@ -66,7 +67,11 @@ class Home extends React.Component {
           <OtpPanel mobileNumber={this.state.mobileNumber} />
         ) : (
           <div>
-            <h1 className="home-title">Sign Up Here</h1>
+            <div className="home-title">
+              <Typography variant="display1" gutterBottom>
+                Sign Up Here
+              </Typography>
+            </div>
             <Grid container justify="center" alignItems="center">
               <div className="form-panel">
                 <Grid item xs={12}>
